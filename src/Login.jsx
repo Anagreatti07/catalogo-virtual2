@@ -1,27 +1,8 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
-import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
 
-const theme =  createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-          main: '#66bcc7',
-        },
-        secondary: {
-          main: '#197e8c',
-        },
-        background: {
-          default: '#fff',
-          paper: '#d2d0d0',
-        },
-        text: {
-          primary: 'rgba(0,0,0,0.87)',
-        },
-      },
-});
 
 function Login() {
 
@@ -33,6 +14,7 @@ function Login() {
 
   const navigate = useNavigate();
 
+  /*se o login for certo ele apaga os campos, e o usuario é enviado para outra pagina */
   useEffect(()=>{
 
     if(login){
@@ -44,10 +26,11 @@ function Login() {
 
   }, [login] );
 
+/*transforma a resposta em json, se o erro não for verdadeiro manda para outra pagina, e se for verdadeiro não manda */
   function Autenticar(evento)
   {
     evento.preventDefault();
-    fetch("https://api.escuelajs.co/api/v1/auth/login",{
+    fetch( process.env.REACT_APP_BACKEND + "login",{
         method:"POST",
         headers:{
             'Content-Type': 'application/json'
@@ -55,24 +38,26 @@ function Login() {
         body: JSON.stringify(
             {
                 email: email,
-                password: senha
+                senha: senha
             }
         )
     })
     .then((resposta)=> resposta.json())
     .then((json) => {
-        if(json.statusCode === 401) {
-            setErro(true);
+        if(json.user) {
+          setLogin(true);
+            
         } else{
-            setLogin(true);
+          setErro(true);
         }
     })
     .catch((erro) => {setErro(true) } )
     
   }
 
+  /*deixar em caixas */
   return (
-    <ThemeProvider theme={theme}>
+   
     <Container component="section" maxWidth="xs">
         <Box sx={{
             mt:10,
@@ -85,6 +70,7 @@ function Login() {
         }}
         >
             <Typography component="h1" variant='h5'>Entrar</Typography>
+            { erro && ( <Alert severity="warning">Revise seus dados e tente novamente</Alert> ) }
             <Box component="form" onSubmit={Autenticar}>
                 <TextField 
                 type="email" 
@@ -94,6 +80,7 @@ function Login() {
                 value={email}
                 onChange={ (e) => setEmail( e.target.value ) } 
                 fullWidth
+                {...erro && ("error")}
                 />
                 <TextField 
                 type="password" 
@@ -120,7 +107,7 @@ function Login() {
             </Box>
         </Box>
     </Container>
-    </ThemeProvider>
+    
   )
 }
 
