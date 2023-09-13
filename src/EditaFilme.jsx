@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 function EditaFilme() {
+   
 
     const{id}=useParams();
 
@@ -18,7 +19,7 @@ function EditaFilme() {
     const[erro, setErro]= useState(false);
 
     useEffect(()=>{
-        fetch(process.env.REACT_APP_BACKEND + "filmes/" + id,{
+        fetch(process.env.REACT_APP_BACKEND + "produtos/" + id,{
             method:"GET",
             headers:{
                 'Content-Type': 'application/json'
@@ -43,7 +44,7 @@ function EditaFilme() {
 
     function Editar(evento){
         evento.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "filmes",{
+        fetch(process.env.REACT_APP_BACKEND + "produtos",{
             method:"PUT",
             headers:{
                 'Content-Type': 'application/json'
@@ -96,7 +97,7 @@ function EditaFilme() {
             <Box component="form" onSubmit={Editar} >
                 <TextField
                 type="text" 
-                label="Titulo" 
+                label="Marca" 
                 variant="filled" 
                 margin="normal"
                 value={titulo}
@@ -105,7 +106,7 @@ function EditaFilme() {
                 />
                 <TextField 
                 type="text" 
-                label="Descrição" 
+                label="Modelo" 
                 variant="filled" 
                 margin="normal"
                 value={descricao}
@@ -114,7 +115,7 @@ function EditaFilme() {
                 />
                  <TextField 
                 type="text" 
-                label="Ano" 
+                label="Cor" 
                 variant="filled" 
                 margin="normal" 
                 value={ano}
@@ -123,7 +124,7 @@ function EditaFilme() {
                 />
                 <TextField
                 type="text" 
-                label="Duração" 
+                label="Numeração" 
                 variant="filled" 
                 margin="normal"
                 value={duracao}
@@ -132,7 +133,7 @@ function EditaFilme() {
                 />
                  <TextField
                 type="text" 
-                label="Categoria" 
+                label="Material" 
                 variant="filled" 
                 margin="normal"
                 value={categoria}

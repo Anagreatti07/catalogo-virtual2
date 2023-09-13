@@ -18,7 +18,7 @@ const theme =  createTheme({
         main: '#197e8c',
       },
       background: {
-        default: '#fff',
+        default: '#000',
         paper: '#d2d0d0',
       },
       text: {
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     element: <Filmes/>
   },
   {
-    path: "/edicao/:id",
+    path: "/produtos/:id",
     element: <EditaFilme/>
   }
 ]);
