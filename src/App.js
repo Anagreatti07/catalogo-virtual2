@@ -1,28 +1,33 @@
 import { Avatar, Button, Container } from "@mui/material";
 import { useEffect, useState } from "react";
-import Filme from "./components/Filme";
+import Tenisnovo from "./components/Tenisnovo";
+import Tenis from "./Tenis"
+import MenuResponsivo from "./components/MenuResponsivo";
+import "./global.css";
+
+
 
 function App(props) {
 
-  const[filmes, setFilmes] = useState();
+  const[tenis, setTenis] = useState();
   const[erro, setErro] = useState();
 
   useEffect(()=>{
-    fetch( process.env.REACT_APP_BACKEND + "filmes",{
+    fetch( process.env.REACT_APP_BACKEND + "tenis",{
       method:"GET",
       headers:{
           'Content-Type': 'application/json'
       },
   })
   .then((resposta)=> resposta.json())
-  .then((json) => {setFilmes(json)})
+  .then((json) => {setTenis(json)})
   .catch((erro) => {setErro(true) } )
   
   },[])
 
     function Excluir(evento, id){
       evento.preventDefault();
-      fetch( process.env.REACT_APP_BACKEND + "filmes",{
+      fetch( process.env.REACT_APP_BACKEND + "tenis",{
         method:"DELETE",
         headers:{
             'Content-Type': 'application/json'
@@ -35,15 +40,16 @@ function App(props) {
     })
     .then((resposta)=> resposta.json())
     .then((json) => {
-       const novaLista = filmes.filter((filme)=> filme._id !==id);
-       setFilmes(novaLista);
+       const novaLista = tenis.filter((tenis)=> tenis._id !==id);
+       setTenis(novaLista);
     })
     .catch((erro) => {setErro(true) } )
     }
 
   return (
    <>
-     <h1>Filmes</h1>
+    <MenuResponsivo/>
+     <h1>Tênis</h1>
      <Container
       sx={{
         display:"flex",
@@ -52,17 +58,17 @@ function App(props) {
         gap:"2rem",
       }}
      >
-     {filmes && (
-      filmes.map((filme, index)=>(
-        <Filme
-          imagem={filme.imagem} 
-          titulo={filme.titulo}
-          descricao={filme.descricao}
-          categoria={filme.categoria}
-          ano={filme.ano}
-          duracao={filme.duracao}
-          excluir={(e)=> Excluir(e, filme._id)}
-          id={filme._id}
+     {tenis && (
+      tenis.map((tenis, index)=>(
+        <Tenisnovo
+          imagem={tenis.imagem} 
+          titulo={tenis.titulo}
+          descricao={tenis.descricao}
+          categoria={tenis.categoria}
+          ano={tenis.ano}
+          duracao={tenis.duracao}
+          excluir={(e)=> Excluir(e, tenis._id)}
+          id={tenis._id}
         />
       ))
      )}

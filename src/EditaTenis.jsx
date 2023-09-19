@@ -1,8 +1,9 @@
 import { Alert, Box, Button, Checkbox, Container, FormControlLabel, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import MenuResponsivo from './components/MenuResponsivo';
 
-function EditaFilme() {
+function EditaTenis() {
    
 
     const{id}=useParams();
@@ -35,7 +36,7 @@ function EditaFilme() {
            setCategoria(json.categoria);
            setImagem(json.imagem);
             } else{
-                setErro("Filme não encontrado");
+                setErro("Tênis não encontrado");
             }     
 
         })
@@ -80,6 +81,8 @@ function EditaFilme() {
    
 
   return (
+    <>
+    <MenuResponsivo/>
     <Container component="section" maxWidth="sm">
         <Box sx={{
             mt:10,
@@ -90,9 +93,9 @@ function EditaFilme() {
             flexDirection: "column",
             alignItems: "center"
         }}>
-            <Typography component="h1" variant='h5'>Editar filme</Typography>
+            <Typography component="h1" variant='h5'>Editar tênis</Typography>
             {erro && (<Alert severity="warning" sx={{mt: 2, mb:2}}>{erro}</Alert>)}
-            {editar &&(<Alert severity="success" sx={{mt: 2, mb:2}}>Filme editado com sucesso</Alert>)}
+            {editar &&(<Alert severity="success" sx={{mt: 2, mb:2}}>Tênis editado com sucesso</Alert>)}
            
             <Box component="form" onSubmit={Editar} >
                 <TextField
@@ -154,7 +157,8 @@ function EditaFilme() {
             </Box>
         </Box>
     </Container>
+    </>
   )
 }
 
-export default EditaFilme
+export default EditaTenis

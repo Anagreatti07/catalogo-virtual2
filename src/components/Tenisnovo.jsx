@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
 import React from 'react'
 
-function Filme(props) {
+function Tenisnovo(props) {
   return (
     <Card sx={{maxWidth:345}}>
         <CardActionArea>
@@ -47,4 +47,4 @@ function Filme(props) {
   )
 }
 
-export default Filme
+export default Tenisnovo;

@@ -1,5 +1,7 @@
 import { Alert, Box, Button, Checkbox, Container, FormControlLabel, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import MenuResponsivo from "./components/MenuResponsivo";
+
 
 function Cadastro() {
     const[email, setEmail] = useState("");
@@ -52,7 +54,10 @@ function Cadastro() {
     }, [cadastro]);
 
   return (
+    <>
+   
     <Container component="section" maxWidth="sm">
+
         <Box sx={{
             mt:10,
             backgroundColor: "#EDEDED",
@@ -119,6 +124,7 @@ function Cadastro() {
             </Box>
         </Box>
     </Container>
+    </>
   )
 }
 

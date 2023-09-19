@@ -1,10 +1,11 @@
 import { Alert, Box, Button, Container, TextField, Typography, Menu, MenuItem } from '@mui/material'
 import  { useState, useEffect } from 'react'
 import React,{} from 'react';
+import MenuResponsivo from './components/MenuResponsivo';
 
 
 
-function Filmes() {
+function Tenis() {
     const[titulo, setTitulo] = useState("");
     const[descricao, setDescricao] = useState("");
     const[ano, setAno]= useState(""); 
@@ -59,36 +60,8 @@ function Filmes() {
 
 
   return (
-    <> <Button
-    id="basic-button"
-    aria-controls={open ? 'basic-menu' : undefined}
-    aria-haspopup="true"
-    aria-expanded={open ? 'true' : undefined}
-    onClick={handleClick}
-  >
-    <Box sx={{
-       
-    }}></Box>
-    Dashboard
-  </Button>
-  <Menu
-    id="basic-menu"
-    anchorEl={anchorEl}
-    open={open}
-    onClose={handleClose}
-    MenuListProps={{
-      'aria-labelledby': 'basic-button',
-    }}
-    >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-        <Box sx={{
-       
-    }}></Box>
-        
-  </Menu>
-
+    <> 
+ <MenuResponsivo/>
 <Container component="section" maxWidth="sm">
     <Box sx={{
         mt:10,
@@ -100,7 +73,7 @@ function Filmes() {
         alignItems: "center"
     }}>
         
-        <Typography component="h1" variant='h5'>Filmes</Typography>
+        <Typography component="h1" variant='h5'>Tênis</Typography>
         {erro && (<Alert severity="warning" sx={{mt:2, mb:2}}>Desculpe tente novamente</Alert>)}
         {cadastro && (<Alert severity="success" sx={{mt:2, mb:2}}>Obrigada por se cadastrar</Alert>)}
 
@@ -167,4 +140,4 @@ function Filmes() {
   )
 }
 
-export default Filmes
+export default Tenis;

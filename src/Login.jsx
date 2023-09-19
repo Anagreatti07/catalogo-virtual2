@@ -1,7 +1,8 @@
-import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
+import MenuResponsivo from './components/MenuResponsivo';
 
 
 function Login() {
@@ -57,7 +58,8 @@ function Login() {
 
   /*deixar em caixas */
   return (
-   
+   <>
+ 
     <Container component="section" maxWidth="xs">
         <Box sx={{
             mt:10,
@@ -95,19 +97,19 @@ function Login() {
                     control={<Checkbox value={lembrar} name="lembrar" onChange={(e) => setLembrar(!lembrar) } />}
                     label="Lembrar-me"
                 />
-                <Button type="submit" variant="contained" fullWidth sx={{mt: 2, mb:2}}>Login</Button>
+                <Button type="submit" variant="contained" fullWidth sx={{mt: 2, mb:2}} >Login</Button>
                 <Grid container>
                     <Grid item xs>
                         Esqueci a senha
                     </Grid>
-                    <Grid item>
-                        Cadastrar
+                    <Grid item >
+                     <Link href={"/cadastro"} sx={{color: 'black', textDecoration:'none'}}>Cadastrar</Link>
                     </Grid>
                 </Grid>
             </Box>
         </Box>
     </Container>
-    
+    </>
   )
 }
 
