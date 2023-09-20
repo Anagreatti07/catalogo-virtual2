@@ -8,7 +8,7 @@ function EditaTenis() {
 
     const{id}=useParams();
 
-    console.log(id);
+    
 
     const[descricao, setDescricao] = useState("");
     const[ano, setAno] = useState("");
@@ -18,9 +18,11 @@ function EditaTenis() {
     const[imagem, setImagem]= useState("");
     const[editar, setEditar]= useState(false);
     const[erro, setErro]= useState(false);
+    
 
     useEffect(()=>{
-        fetch(process.env.REACT_APP_BACKEND + "produtos/" + id,{
+        const usuario = localStorage.getItem("usuario");
+        fetch(process.env.REACT_APP_BACKEND + "produtos/" + usuario + "/" + id,{
             method:"GET",
             headers:{
                 'Content-Type': 'application/json'
@@ -58,7 +60,9 @@ function EditaTenis() {
                     ano: ano,
                     duracao: duracao,
                     categoria: categoria,
-                    imagem: imagem
+                    imagem: imagem,
+                    usuario:localStorage.getItem("usuario")
+
 
                 }
             )
@@ -70,12 +74,12 @@ function EditaTenis() {
                 setEditar( true );
                 setErro( false );
             } else {
-                setEditar( "Não foi possivel editar o filme");
+                setEditar(false);
                 setErro( true );
             }
 
         })
-        .catch( (erro) => setErro( true ) );
+        .catch( (erro) => {setErro( true )} );
     }
 
    

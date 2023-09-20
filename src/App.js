@@ -5,19 +5,22 @@ import Tenis from "./Tenis"
 import MenuResponsivo from "./components/MenuResponsivo";
 import "./global.css";
 
+//650ae0792a26e4e19b77613c
 
-
-function App(props) {
+function App() {
 
   const[tenis, setTenis] = useState();
   const[erro, setErro] = useState();
+  
 
   useEffect(()=>{
-    fetch( process.env.REACT_APP_BACKEND + "tenis",{
-      method:"GET",
+
+    const usuario = localStorage.getItem("usuario");
+
+    fetch( process.env.REACT_APP_BACKEND + "produtos/" + usuario , {
       headers:{
           'Content-Type': 'application/json'
-      },
+      }
   })
   .then((resposta)=> resposta.json())
   .then((json) => {setTenis(json)})
@@ -27,14 +30,15 @@ function App(props) {
 
     function Excluir(evento, id){
       evento.preventDefault();
-      fetch( process.env.REACT_APP_BACKEND + "tenis",{
+      fetch( process.env.REACT_APP_BACKEND + "produtos",{
         method:"DELETE",
         headers:{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(
             {
-               id:id
+               id:id,
+               usuario: localStorage.getItem("usuario")
             }
         )
     })

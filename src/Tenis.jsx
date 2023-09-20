@@ -26,7 +26,7 @@ function Tenis() {
 
     function Filmes(evento) {
         evento.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "filmes",{
+        fetch(process.env.REACT_APP_BACKEND + "produtos",{
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'
@@ -38,7 +38,8 @@ function Tenis() {
                     ano: ano,
                     duracao: duracao,
                     categoria: categoria,
-                    imagem: imagem
+                    imagem: imagem,
+                    usuario: localStorage.getItem("usuario")
 
                 }
             )
@@ -75,7 +76,7 @@ function Tenis() {
         
         <Typography component="h1" variant='h5'>Tênis</Typography>
         {erro && (<Alert severity="warning" sx={{mt:2, mb:2}}>Desculpe tente novamente</Alert>)}
-        {cadastro && (<Alert severity="success" sx={{mt:2, mb:2}}>Obrigada por se cadastrar</Alert>)}
+        {cadastro && (<Alert severity="success" sx={{mt:2, mb:2}}>Obrigada por cadastrar</Alert>)}
 
         <Box component="form" onSubmit={Filmes}>
             <TextField
@@ -97,7 +98,7 @@ function Tenis() {
             fullWidth
             />
              <TextField 
-            type="number" 
+            type="text" 
             label="Cor" 
             variant="filled" 
             margin="normal" 
